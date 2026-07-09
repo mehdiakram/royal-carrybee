@@ -1,0 +1,123 @@
+/* Royal Carrybee Frontend CSS */
+
+/* Checkout Location Fields */
+.rcb-city-field,
+.rcb-zone-field,
+.rcb-area-field {
+    margin-bottom: 15px;
+}
+
+.rcb-city-field select,
+.rcb-zone-field select,
+.rcb-area-field select {
+    width: 100%;
+    padding: 12px 15px;
+    border: 1px solid #dcdcde;
+    border-radius: 6px;
+    font-size: 14px;
+    background-color: #fff;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.rcb-city-field select:focus,
+.rcb-zone-field select:focus,
+.rcb-area-field select:focus {
+    border-color: #f59e0b;
+    box-shadow: 0 0 0 2px rgba(245, 158, 11, 0.2);
+    outline: none;
+}
+
+.rcb-city-field select:disabled,
+.rcb-zone-field select:disabled,
+.rcb-area-field select:disabled {
+    background-color: #f6f7f7;
+    cursor: not-allowed;
+    opacity: 0.7;
+}
+
+/* Loading State */
+.rcb-loading {
+    position: relative;
+    pointer-events: none;
+}
+
+.rcb-loading::after {
+    content: '';
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 16px;
+    height: 16px;
+    border: 2px solid #dcdcde;
+    border-top-color: #f59e0b;
+    border-radius: 50%;
+    animation: rcb-spin 0.6s linear infinite;
+}
+
+@keyframes rcb-spin {
+    to { transform: translateY(-50%) rotate(360deg); }
+}
+
+/* Tracking Box */
+.rcb-tracking-box {
+    background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+    border: 1px solid #f59e0b;
+    border-radius: 10px;
+    padding: 25px;
+    margin: 25px 0;
+    text-align: center;
+}
+
+.rcb-tracking-box h2 {
+    margin: 0 0 15px;
+    color: #92400e;
+    font-size: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.rcb-tracking-box h2::before {
+    content: '🐝';
+    font-size: 24px;
+}
+
+.rcb-tracking-box code {
+    display: inline-block;
+    background: #f59e0b;
+    color: #fff;
+    padding: 8px 25px;
+    border-radius: 25px;
+    font-size: 18px;
+    font-weight: 700;
+    letter-spacing: 1px;
+}
+
+.rcb-tracking-note {
+    color: #78716c;
+    margin: 15px 0 0;
+    font-size: 14px;
+}
+
+/* Carrybee Badge in Shipping Options */
+.shipping_method[value*="carrybee"] + label::before {
+    content: '🐝 ';
+}
+
+/* Select2 Override for Carrybee */
+.select2-container--default .select2-selection--single.rcb-select {
+    height: 44px;
+    border-radius: 6px;
+    border-color: #dcdcde;
+}
+
+.select2-container--default .select2-selection--single .select2-selection__rendered {
+    line-height: 42px;
+    padding-left: 15px;
+}
+
+.select2-container--default .select2-selection--single .select2-selection__arrow {
+    height: 42px;
+}

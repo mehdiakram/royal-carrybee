@@ -1,0 +1,459 @@
+{
+  "title": "Royal Carrybee Product Description",
+  "type": "page",
+  "version": "0.4",
+  "page_settings": [],
+  "content": [
+    {
+      "id": "rcb-main-wrapper",
+      "elType": "container",
+      "settings": {
+        "content_width": "boxed",
+        "flex_direction": "column",
+        "padding": {
+          "unit": "px",
+          "top": "20",
+          "right": "20",
+          "bottom": "20",
+          "left": "20"
+        }
+      },
+      "elements": [
+        {
+          "id": "rcb-hero",
+          "elType": "container",
+          "settings": {
+            "content_width": "full",
+            "flex_direction": "column",
+            "flex_align_items": "center",
+            "background_background": "gradient",
+            "background_color": "#FF6B35",
+            "background_color_b": "#F7931E",
+            "background_gradient_angle": {
+              "unit": "deg",
+              "size": 135
+            },
+            "padding": {
+              "unit": "px",
+              "top": "40",
+              "right": "40",
+              "bottom": "40",
+              "left": "40"
+            },
+            "border_radius": {
+              "unit": "px",
+              "top": "16",
+              "right": "16",
+              "bottom": "16",
+              "left": "16"
+            },
+            "margin": {
+              "unit": "px",
+              "bottom": "30"
+            }
+          },
+          "elements": [
+            {
+              "id": "rcb-hero-heading",
+              "elType": "widget",
+              "widgetType": "heading",
+              "settings": {
+                "title": "📦 Royal Carrybee",
+                "align": "center",
+                "title_color": "#FFFFFF",
+                "typography_typography": "custom",
+                "typography_font_size": {
+                  "unit": "em",
+                  "size": 2
+                },
+                "typography_font_weight": "700"
+              }
+            },
+            {
+              "id": "rcb-hero-text",
+              "elType": "widget",
+              "widgetType": "text-editor",
+              "settings": {
+                "editor": "<p style=\"text-align: center; color: #fff; opacity: 0.95; font-size: 1.2em; margin: 0;\">Seamless WooCommerce Shipping Integration for Bangladesh</p>"
+              }
+            }
+          ]
+        },
+        {
+          "id": "rcb-intro",
+          "elType": "container",
+          "settings": {
+            "content_width": "full",
+            "margin": {
+              "unit": "px",
+              "bottom": "25"
+            }
+          },
+          "elements": [
+            {
+              "id": "rcb-intro-text",
+              "elType": "widget",
+              "widgetType": "text-editor",
+              "settings": {
+                "editor": "<p style=\"color: #333; margin-bottom: 1.5em; font-size: 16px;\"><strong>Why Choose Royal Carrybee?</strong> Managing shipping in Bangladesh can be complex and time-consuming. <strong>Royal Carrybee</strong> integrates your WooCommerce store directly with Carrybee courier service, enabling <strong>automated order creation, real-time tracking, and seamless delivery management</strong>.</p>"
+              }
+            }
+          ]
+        },
+        {
+          "id": "rcb-features",
+          "elType": "container",
+          "settings": {
+            "content_width": "full",
+            "flex_direction": "column",
+            "background_background": "classic",
+            "background_color": "#f8f9fa",
+            "padding": {
+              "unit": "px",
+              "top": "25",
+              "right": "25",
+              "bottom": "25",
+              "left": "25"
+            },
+            "border_radius": {
+              "unit": "px",
+              "top": "12",
+              "right": "12",
+              "bottom": "12",
+              "left": "12"
+            },
+            "border_border": "solid",
+            "border_width": {
+              "unit": "px",
+              "top": "0",
+              "right": "0",
+              "bottom": "0",
+              "left": "5"
+            },
+            "border_color": "#FF6B35",
+            "margin": {
+              "unit": "px",
+              "bottom": "25"
+            }
+          },
+          "elements": [
+            {
+              "id": "rcb-features-heading",
+              "elType": "widget",
+              "widgetType": "heading",
+              "settings": {
+                "title": "🚀 Powerful Features at Your Fingertips",
+                "title_color": "#FF6B35",
+                "typography_typography": "custom",
+                "typography_font_size": {
+                  "unit": "em",
+                  "size": 1.3
+                }
+              }
+            },
+            {
+              "id": "rcb-features-list",
+              "elType": "widget",
+              "widgetType": "text-editor",
+              "settings": {
+                "editor": "<p style=\"color: #555; margin-bottom: 15px;\">Royal Carrybee comes with everything you need for efficient shipping management:</p><div style=\"display: grid; gap: 12px;\"><div style=\"background: #fff; padding: 15px; border-radius: 8px; border-left: 4px solid #FF6B35;\"><strong style=\"color: #FF6B35;\">🔗 Carrybee API v2.0 Integration:</strong> <span style=\"color: #555;\">Full integration with Carrybee's latest API for reliable order management and tracking.</span></div><div style=\"background: #fff; padding: 15px; border-radius: 8px; border-left: 4px solid #27ae60;\"><strong style=\"color: #27ae60;\">📍 Cascading Location Dropdowns:</strong> <span style=\"color: #555;\">Smart City → Zone → Area selection at checkout for accurate delivery addresses.</span></div><div style=\"background: #fff; padding: 15px; border-radius: 8px; border-left: 4px solid #9b59b6;\"><strong style=\"color: #9b59b6;\">🏪 Store Management:</strong> <span style=\"color: #555;\">Manage multiple pickup stores directly from your WordPress dashboard.</span></div><div style=\"background: #fff; padding: 15px; border-radius: 8px; border-left: 4px solid #e74c3c;\"><strong style=\"color: #e74c3c;\">📦 One-Click Order Creation:</strong> <span style=\"color: #555;\">Create Carrybee shipping orders directly from WooCommerce order pages with a single click.</span></div><div style=\"background: #fff; padding: 15px; border-radius: 8px; border-left: 4px solid #f39c12;\"><strong style=\"color: #f39c12;\">🔄 Webhook Support:</strong> <span style=\"color: #555;\">Real-time order status updates via Carrybee webhooks for instant tracking information.</span></div><div style=\"background: #fff; padding: 15px; border-radius: 8px; border-left: 4px solid #1abc9c;\"><strong style=\"color: #1abc9c;\">🎨 Beautiful Admin Interface:</strong> <span style=\"color: #555;\">Modern, intuitive dashboard with SweetAlert2 notifications and DataTables integration.</span></div><div style=\"background: #fff; padding: 15px; border-radius: 8px; border-left: 4px solid #34495e;\"><strong style=\"color: #34495e;\">🧪 Sandbox & Production Modes:</strong> <span style=\"color: #555;\">Test your integration safely in sandbox mode before going live with production.</span></div><div style=\"background: #fff; padding: 15px; border-radius: 8px; border-left: 4px solid #e67e22;\"><strong style=\"color: #e67e22;\">🌐 Multilingual Ready:</strong> <span style=\"color: #555;\">Full translation support with Bengali (বাংলা) included out of the box.</span></div></div>"
+              }
+            }
+          ]
+        },
+        {
+          "id": "rcb-shipping",
+          "elType": "container",
+          "settings": {
+            "content_width": "full",
+            "flex_direction": "column",
+            "background_background": "gradient",
+            "background_color": "#FFF3E0",
+            "background_color_b": "#FFE0B2",
+            "background_gradient_angle": {
+              "unit": "deg",
+              "size": 135
+            },
+            "padding": {
+              "unit": "px",
+              "top": "25",
+              "right": "25",
+              "bottom": "25",
+              "left": "25"
+            },
+            "border_radius": {
+              "unit": "px",
+              "top": "12",
+              "right": "12",
+              "bottom": "12",
+              "left": "12"
+            },
+            "border_border": "solid",
+            "border_width": {
+              "unit": "px",
+              "top": "2",
+              "right": "2",
+              "bottom": "2",
+              "left": "2"
+            },
+            "border_color": "#FF9800",
+            "margin": {
+              "unit": "px",
+              "bottom": "25"
+            }
+          },
+          "elements": [
+            {
+              "id": "rcb-shipping-heading",
+              "elType": "widget",
+              "widgetType": "heading",
+              "settings": {
+                "title": "🚚 Shipping Made Simple",
+                "title_color": "#E65100",
+                "typography_typography": "custom",
+                "typography_font_size": {
+                  "unit": "em",
+                  "size": 1.3
+                }
+              }
+            },
+            {
+              "id": "rcb-shipping-text",
+              "elType": "widget",
+              "widgetType": "text-editor",
+              "settings": {
+                "editor": "<p style=\"color: #5D4037; margin-bottom: 15px;\">Everything you need for hassle-free shipping:</p><div style=\"display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px;\"><div style=\"background: rgba(255,255,255,0.9); padding: 15px; border-radius: 8px; text-align: center;\"><strong style=\"color: #FF6B35;\">📋 Order Management</strong><p style=\"margin: 5px 0 0; color: #666; font-size: 14px;\">View & manage all orders</p></div><div style=\"background: rgba(255,255,255,0.9); padding: 15px; border-radius: 8px; text-align: center;\"><strong style=\"color: #F7931E;\">🔍 Real-Time Tracking</strong><p style=\"margin: 5px 0 0; color: #666; font-size: 14px;\">Live shipment updates</p></div><div style=\"background: rgba(255,255,255,0.9); padding: 15px; border-radius: 8px; text-align: center;\"><strong style=\"color: #FF9800;\">📊 Order Analytics</strong><p style=\"margin: 5px 0 0; color: #666; font-size: 14px;\">Track delivery performance</p></div><div style=\"background: rgba(255,255,255,0.9); padding: 15px; border-radius: 8px; text-align: center;\"><strong style=\"color: #EF6C00;\">💰 COD Support</strong><p style=\"margin: 5px 0 0; color: #666; font-size: 14px;\">Cash on delivery ready</p></div><div style=\"background: rgba(255,255,255,0.9); padding: 15px; border-radius: 8px; text-align: center;\"><strong style=\"color: #E65100;\">📍 Area Coverage</strong><p style=\"margin: 5px 0 0; color: #666; font-size: 14px;\">Nationwide delivery</p></div><div style=\"background: rgba(255,255,255,0.9); padding: 15px; border-radius: 8px; text-align: center;\"><strong style=\"color: #BF360C;\">⚡ Fast Processing</strong><p style=\"margin: 5px 0 0; color: #666; font-size: 14px;\">Quick order handover</p></div></div>"
+              }
+            }
+          ]
+        },
+        {
+          "id": "rcb-advantage",
+          "elType": "container",
+          "settings": {
+            "content_width": "full",
+            "flex_direction": "column",
+            "background_background": "classic",
+            "background_color": "#FFF8E1",
+            "padding": {
+              "unit": "px",
+              "top": "25",
+              "right": "25",
+              "bottom": "25",
+              "left": "25"
+            },
+            "border_radius": {
+              "unit": "px",
+              "top": "12",
+              "right": "12",
+              "bottom": "12",
+              "left": "12"
+            },
+            "border_border": "solid",
+            "border_width": {
+              "unit": "px",
+              "top": "0",
+              "right": "0",
+              "bottom": "0",
+              "left": "5"
+            },
+            "border_color": "#FFA000",
+            "margin": {
+              "unit": "px",
+              "bottom": "25"
+            }
+          },
+          "elements": [
+            {
+              "id": "rcb-advantage-heading",
+              "elType": "widget",
+              "widgetType": "heading",
+              "settings": {
+                "title": "🏆 The Royal Carrybee Advantage",
+                "title_color": "#FF8F00",
+                "typography_typography": "custom",
+                "typography_font_size": {
+                  "unit": "em",
+                  "size": 1.3
+                }
+              }
+            },
+            {
+              "id": "rcb-advantage-list",
+              "elType": "widget",
+              "widgetType": "text-editor",
+              "settings": {
+                "editor": "<ul style=\"margin: 0; padding-left: 20px; color: #37474f;\"><li style=\"margin-bottom: 10px;\"><strong>Seamless Integration:</strong> Connect your WooCommerce store to Carrybee in minutes with our easy setup wizard.</li><li style=\"margin-bottom: 10px;\"><strong>Automated Workflow:</strong> Orders are automatically synced with Carrybee, reducing manual data entry and errors.</li><li style=\"margin-bottom: 10px;\"><strong>Complete Visibility:</strong> Track all shipments from creation to delivery with real-time status updates.</li><li style=\"margin-bottom: 10px;\"><strong>Flexible Configuration:</strong> Configure shipping rates, zones, and delivery options to match your business needs.</li><li style=\"margin-bottom: 10px;\"><strong>100% Free & Open Source:</strong> No premium upsells, no feature locks. Full functionality available for everyone.</li><li style=\"margin-bottom: 0;\"><strong>Developer Friendly:</strong> Clean code, proper hooks, and filters for easy customization.</li></ul>"
+              }
+            }
+          ]
+        },
+        {
+          "id": "rcb-cta",
+          "elType": "container",
+          "settings": {
+            "content_width": "full",
+            "flex_direction": "column",
+            "flex_align_items": "center",
+            "background_background": "gradient",
+            "background_color": "#5D4037",
+            "background_color_b": "#795548",
+            "background_gradient_angle": {
+              "unit": "deg",
+              "size": 135
+            },
+            "padding": {
+              "unit": "px",
+              "top": "30",
+              "right": "30",
+              "bottom": "30",
+              "left": "30"
+            },
+            "border_radius": {
+              "unit": "px",
+              "top": "12",
+              "right": "12",
+              "bottom": "12",
+              "left": "12"
+            },
+            "margin": {
+              "unit": "px",
+              "bottom": "25"
+            }
+          },
+          "elements": [
+            {
+              "id": "rcb-cta-text",
+              "elType": "widget",
+              "widgetType": "text-editor",
+              "settings": {
+                "editor": "<p style=\"margin: 0; font-size: 18px; font-weight: 600; text-align: center; color: #fff;\">📦 Streamline your WooCommerce shipping with Bangladesh's leading courier integration plugin.</p>"
+              }
+            }
+          ]
+        },
+        {
+          "id": "rcb-specs",
+          "elType": "container",
+          "settings": {
+            "content_width": "full",
+            "flex_direction": "column",
+            "background_background": "classic",
+            "background_color": "#f5f5f5",
+            "padding": {
+              "unit": "px",
+              "top": "20",
+              "right": "20",
+              "bottom": "20",
+              "left": "20"
+            },
+            "border_radius": {
+              "unit": "px",
+              "top": "12",
+              "right": "12",
+              "bottom": "12",
+              "left": "12"
+            },
+            "margin": {
+              "unit": "px",
+              "bottom": "25"
+            }
+          },
+          "elements": [
+            {
+              "id": "rcb-specs-heading",
+              "elType": "widget",
+              "widgetType": "heading",
+              "settings": {
+                "title": "⚙️ Technical Specifications",
+                "title_color": "#555555",
+                "typography_typography": "custom",
+                "typography_font_size": {
+                  "unit": "px",
+                  "size": 16
+                }
+              }
+            },
+            {
+              "id": "rcb-specs-list",
+              "elType": "widget",
+              "widgetType": "text-editor",
+              "settings": {
+                "editor": "<ul style=\"margin: 0; padding-left: 20px; color: #666; font-size: 14px;\"><li style=\"margin-bottom: 5px;\">Compatibility: WordPress 5.8+ & WooCommerce 5.0+</li><li style=\"margin-bottom: 5px;\">PHP Version: 7.4 or higher</li><li style=\"margin-bottom: 5px;\">License: GPL v2 or later</li><li style=\"margin-bottom: 5px;\">Updates: Regular updates via GitHub</li><li style=\"margin-bottom: 0;\">Support: Community support via GitHub Issues</li></ul>"
+              }
+            }
+          ]
+        },
+        {
+          "id": "rcb-download",
+          "elType": "container",
+          "settings": {
+            "content_width": "full",
+            "flex_direction": "column",
+            "flex_align_items": "center",
+            "padding": {
+              "unit": "px",
+              "top": "20",
+              "right": "20",
+              "bottom": "20",
+              "left": "20"
+            }
+          },
+          "elements": [
+            {
+              "id": "rcb-download-button",
+              "elType": "widget",
+              "widgetType": "button",
+              "settings": {
+                "text": "📦 Download Royal Carrybee from GitHub",
+                "link": {
+                  "url": "https://github.com/mehdiakram/royal-carrybee",
+                  "is_external": true
+                },
+                "align": "center",
+                "size": "lg",
+                "background_color": "#FF6B35",
+                "background_hover_color": "#F7931E",
+                "border_radius": {
+                  "unit": "px",
+                  "top": "50",
+                  "right": "50",
+                  "bottom": "50",
+                  "left": "50"
+                },
+                "text_padding": {
+                  "unit": "px",
+                  "top": "18",
+                  "right": "50",
+                  "bottom": "18",
+                  "left": "50"
+                },
+                "typography_typography": "custom",
+                "typography_font_size": {
+                  "unit": "px",
+                  "size": 18
+                },
+                "typography_font_weight": "700",
+                "box_shadow_box_shadow_type": "yes",
+                "box_shadow_box_shadow": {
+                  "horizontal": 0,
+                  "vertical": 4,
+                  "blur": 15,
+                  "color": "rgba(255, 107, 53, 0.4)"
+                }
+              }
+            },
+            {
+              "id": "rcb-download-text",
+              "elType": "widget",
+              "widgetType": "text-editor",
+              "settings": {
+                "editor": "<p style=\"margin: 15px 0 0; color: #666; font-size: 14px; text-align: center;\">Free & Open Source - Simplify your shipping today!</p>"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,398 @@
+# Royal Carrybee - Bengali Translation
+# Copyright (C) 2026 Royal Technologies
+# This file is distributed under the GPL-2.0 license.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Royal Carrybee 1.0.0\n"
+"Report-Msgid-Bugs-To: info@royaltechbd.com\n"
+"POT-Creation-Date: 2026-01-18 19:00+0600\n"
+"PO-Revision-Date: 2026-01-18 19:00+0600\n"
+"Last-Translator: Royal Technologies <info@royaltechbd.com>\n"
+"Language-Team: Bengali\n"
+"Language: bn_BD\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+msgid "Royal Carrybee requires WooCommerce to be installed and active."
+msgstr "Royal Carrybee চালাতে WooCommerce ইনস্টল ও সক্রিয় থাকতে হবে।"
+
+msgid "Carrybee Shipping"
+msgstr "ক্যারিবি শিপিং"
+
+msgid "Carrybee"
+msgstr "ক্যারিবি"
+
+msgid "General Settings"
+msgstr "সাধারণ সেটিংস"
+
+msgid "Stores"
+msgstr "স্টোর সমূহ"
+
+msgid "Orders"
+msgstr "অর্ডার সমূহ"
+
+msgid "About"
+msgstr "সম্পর্কে"
+
+msgid "API Credentials"
+msgstr "API তথ্য"
+
+msgid "Environment"
+msgstr "এনভায়রনমেন্ট"
+
+msgid "Sandbox (Testing)"
+msgstr "স্যান্ডবক্স (পরীক্ষা)"
+
+msgid "Production (Live)"
+msgstr "প্রোডাকশন (লাইভ)"
+
+msgid "Client ID"
+msgstr "ক্লায়েন্ট আইডি"
+
+msgid "Client Secret"
+msgstr "ক্লায়েন্ট সিক্রেট"
+
+msgid "Client Context"
+msgstr "ক্লায়েন্ট কনটেক্সট"
+
+msgid "Test Connection"
+msgstr "সংযোগ পরীক্ষা"
+
+msgid "Default Store"
+msgstr "ডিফল্ট স্টোর"
+
+msgid "Select Pickup Store"
+msgstr "পিকআপ স্টোর নির্বাচন করুন"
+
+msgid "-- Select Store --"
+msgstr "-- স্টোর নির্বাচন করুন --"
+
+msgid "Select the default pickup store for orders."
+msgstr "অর্ডারের জন্য ডিফল্ট পিকআপ স্টোর নির্বাচন করুন।"
+
+msgid "Refresh Stores"
+msgstr "স্টোর রিফ্রেশ করুন"
+
+msgid "Order Settings"
+msgstr "অর্ডার সেটিংস"
+
+msgid "Auto-create Carrybee order when WooCommerce order is placed"
+msgstr "WooCommerce অর্ডার হলে স্বয়ংক্রিয়ভাবে ক্যারিবি অর্ডার তৈরি করুন"
+
+msgid "Default Weight (grams)"
+msgstr "ডিফল্ট ওজন (গ্রাম)"
+
+msgid "Default Product Type"
+msgstr "ডিফল্ট প্রোডাক্ট টাইপ"
+
+msgid "Parcel"
+msgstr "পার্সেল"
+
+msgid "Book"
+msgstr "বই"
+
+msgid "Document"
+msgstr "ডকুমেন্ট"
+
+msgid "Default Delivery Type"
+msgstr "ডিফল্ট ডেলিভারি টাইপ"
+
+msgid "Normal Delivery"
+msgstr "সাধারণ ডেলিভারি"
+
+msgid "Express Delivery"
+msgstr "এক্সপ্রেস ডেলিভারি"
+
+msgid "Webhook Settings"
+msgstr "ওয়েবহুক সেটিংস"
+
+msgid "Webhook URL"
+msgstr "ওয়েবহুক ইউআরএল"
+
+msgid "Provide this URL to Carrybee for webhook notifications."
+msgstr "ওয়েবহুক নোটিফিকেশনের জন্য এই URL ক্যারিবিকে দিন।"
+
+msgid "Webhook Secret"
+msgstr "ওয়েবহুক সিক্রেট"
+
+msgid "This secret will be sent in X-Carrybee-Webhook-Signature header."
+msgstr "এই সিক্রেট X-Carrybee-Webhook-Signature হেডারে পাঠানো হবে।"
+
+msgid "Changes will apply immediately after saving."
+msgstr "সেভ করার পরে পরিবর্তন কার্যকর হবে।"
+
+msgid "Save Settings"
+msgstr "সেটিংস সেভ করুন"
+
+msgid "Your Stores"
+msgstr "আপনার স্টোর সমূহ"
+
+msgid "Add New Store"
+msgstr "নতুন স্টোর যোগ করুন"
+
+msgid "Store Name"
+msgstr "স্টোরের নাম"
+
+msgid "Contact Person"
+msgstr "যোগাযোগকারী"
+
+msgid "Phone"
+msgstr "ফোন"
+
+msgid "Address"
+msgstr "ঠিকানা"
+
+msgid "Status"
+msgstr "স্ট্যাটাস"
+
+msgid "Default"
+msgstr "ডিফল্ট"
+
+msgid "Contact Person Name"
+msgstr "যোগাযোগকারীর নাম"
+
+msgid "Contact Number"
+msgstr "যোগাযোগ নম্বর"
+
+msgid "Secondary Number"
+msgstr "বিকল্প নম্বর"
+
+msgid "City"
+msgstr "শহর"
+
+msgid "Zone"
+msgstr "জোন"
+
+msgid "Area"
+msgstr "এলাকা"
+
+msgid "Cancel"
+msgstr "বাতিল"
+
+msgid "Create Store"
+msgstr "স্টোর তৈরি করুন"
+
+msgid "Carrybee Orders"
+msgstr "ক্যারিবি অর্ডার সমূহ"
+
+msgid "Order ID"
+msgstr "অর্ডার আইডি"
+
+msgid "Consignment ID"
+msgstr "কনসাইনমেন্ট আইডি"
+
+msgid "Delivery Fee"
+msgstr "ডেলিভারি ফি"
+
+msgid "COD Fee"
+msgstr "COD ফি"
+
+msgid "Collected"
+msgstr "আদায়কৃত"
+
+msgid "Date"
+msgstr "তারিখ"
+
+msgid "Actions"
+msgstr "অ্যাকশন"
+
+msgid "Royal Carrybee"
+msgstr "রয়্যাল ক্যারিবি"
+
+msgid "About This Plugin"
+msgstr "এই প্লাগইন সম্পর্কে"
+
+msgid "Royal Carrybee is a professional WooCommerce shipping integration plugin for Carrybee courier service in Bangladesh. It seamlessly connects your online store with Carrybee's delivery network, enabling automated order creation, real-time tracking, and webhook-based status updates."
+msgstr "রয়্যাল ক্যারিবি বাংলাদেশের ক্যারিবি কুরিয়ার সার্ভিসের জন্য একটি পেশাদার WooCommerce শিপিং ইন্টিগ্রেশন প্লাগইন। এটি আপনার অনলাইন স্টোরকে ক্যারিবি'র ডেলিভারি নেটওয়ার্কের সাথে সংযুক্ত করে, স্বয়ংক্রিয় অর্ডার তৈরি, রিয়েল-টাইম ট্র্যাকিং এবং ওয়েবহুক-ভিত্তিক স্ট্যাটাস আপডেট সক্ষম করে।"
+
+msgid "Key Features"
+msgstr "মূল বৈশিষ্ট্যসমূহ"
+
+msgid "WooCommerce Shipping Method"
+msgstr "WooCommerce শিপিং মেথড"
+
+msgid "City/Zone/Area Selection"
+msgstr "শহর/জোন/এলাকা নির্বাচন"
+
+msgid "Auto Order Creation"
+msgstr "স্বয়ংক্রিয় অর্ডার তৈরি"
+
+msgid "Real-time Tracking"
+msgstr "রিয়েল-টাইম ট্র্যাকিং"
+
+msgid "Webhook Integration"
+msgstr "ওয়েবহুক ইন্টিগ্রেশন"
+
+msgid "Multiple Store Support"
+msgstr "মাল্টি-স্টোর সাপোর্ট"
+
+msgid "COD Support"
+msgstr "COD সাপোর্ট"
+
+msgid "Sandbox Testing"
+msgstr "স্যান্ডবক্স টেস্টিং"
+
+msgid "Developer"
+msgstr "ডেভেলপার"
+
+msgid "Professional Web Development & Design Solutions"
+msgstr "পেশাদার ওয়েব ডেভেলপমেন্ট ও ডিজাইন সলিউশন"
+
+msgid "Website"
+msgstr "ওয়েবসাইট"
+
+msgid "Email"
+msgstr "ইমেইল"
+
+msgid "Mobile"
+msgstr "মোবাইল"
+
+msgid "Carrybee Delivery"
+msgstr "ক্যারিবি ডেলিভারি"
+
+msgid "Carrybee courier delivery for Bangladesh"
+msgstr "বাংলাদেশের জন্য ক্যারিবি কুরিয়ার ডেলিভারি"
+
+msgid "Enable/Disable"
+msgstr "সক্রিয়/নিষ্ক্রিয়"
+
+msgid "Enable Carrybee Shipping"
+msgstr "ক্যারিবি শিপিং সক্রিয় করুন"
+
+msgid "Method Title"
+msgstr "মেথডের নাম"
+
+msgid "Title shown to customers at checkout"
+msgstr "চেকআউটে কাস্টমারদের দেখানো নাম"
+
+msgid "Delivery Type"
+msgstr "ডেলিভারি টাইপ"
+
+msgid "Flat Rate (৳)"
+msgstr "ফ্ল্যাট রেট (৳)"
+
+msgid "Flat delivery charge. Set 0 for free shipping."
+msgstr "নির্দিষ্ট ডেলিভারি চার্জ। ফ্রি শিপিং-এর জন্য ০ দিন।"
+
+msgid "Free Shipping Threshold (৳)"
+msgstr "ফ্রি শিপিং থ্রেশোল্ড (৳)"
+
+msgid "Order amount above which shipping is free. Leave empty to disable."
+msgstr "এই পরিমাণের উপরে অর্ডারে শিপিং ফ্রি। বন্ধ করতে খালি রাখুন।"
+
+msgid "Tax Status"
+msgstr "ট্যাক্স স্ট্যাটাস"
+
+msgid "Taxable"
+msgstr "করযোগ্য"
+
+msgid "None"
+msgstr "কোনটি নয়"
+
+msgid "Select City"
+msgstr "শহর নির্বাচন করুন"
+
+msgid "Select Zone"
+msgstr "জোন নির্বাচন করুন"
+
+msgid "Select Area"
+msgstr "এলাকা নির্বাচন করুন"
+
+msgid "Loading..."
+msgstr "লোড হচ্ছে..."
+
+msgid "City ID required"
+msgstr "শহর আইডি প্রয়োজন"
+
+msgid "City and Zone ID required"
+msgstr "শহর এবং জোন আইডি প্রয়োজন"
+
+msgid "Carrybee Location IDs"
+msgstr "ক্যারিবি লোকেশন আইডি"
+
+msgid "City ID:"
+msgstr "শহর আইডি:"
+
+msgid "Zone ID:"
+msgstr "জোন আইডি:"
+
+msgid "Area ID:"
+msgstr "এলাকা আইডি:"
+
+msgid "Carrybee: Could not create order - no default store set."
+msgstr "ক্যারিবি: অর্ডার তৈরি করা যায়নি - ডিফল্ট স্টোর সেট করা নেই।"
+
+msgid "Carrybee: Could not create order - missing city or zone."
+msgstr "ক্যারিবি: অর্ডার তৈরি করা যায়নি - শহর বা জোন নেই।"
+
+msgid "Carrybee: Failed to create order - %s"
+msgstr "ক্যারিবি: অর্ডার তৈরি ব্যর্থ - %s"
+
+msgid "Carrybee order created. Consignment ID: %s"
+msgstr "ক্যারিবি অর্ডার তৈরি হয়েছে। কনসাইনমেন্ট আইডি: %s"
+
+msgid "Delivery Tracking"
+msgstr "ডেলিভারি ট্র্যাকিং"
+
+msgid "Tracking ID:"
+msgstr "ট্র্যাকিং আইডি:"
+
+msgid "Your order has been submitted for delivery via Carrybee courier."
+msgstr "আপনার অর্ডার ক্যারিবি কুরিয়ারের মাধ্যমে ডেলিভারির জন্য জমা দেওয়া হয়েছে।"
+
+msgid "Carrybee Tracking ID:"
+msgstr "ক্যারিবি ট্র্যাকিং আইডি:"
+
+msgid "🐝 Carrybee Shipping"
+msgstr "🐝 ক্যারিবি শিপিং"
+
+msgid "No Carrybee order created yet."
+msgstr "এখনও কোনো ক্যারিবি অর্ডার তৈরি হয়নি।"
+
+msgid "Create Carrybee Order"
+msgstr "ক্যারিবি অর্ডার তৈরি করুন"
+
+msgid "Sync"
+msgstr "সিঙ্ক"
+
+msgid "Attempts"
+msgstr "প্রচেষ্টা"
+
+msgid "Invalid webhook signature"
+msgstr "অবৈধ ওয়েবহুক সিগনেচার"
+
+msgid "Invalid webhook payload"
+msgstr "অবৈধ ওয়েবহুক পেলোড"
+
+msgid "Saving..."
+msgstr "সেভ হচ্ছে..."
+
+msgid "Settings Saved!"
+msgstr "সেটিংস সেভ হয়েছে!"
+
+msgid "Error"
+msgstr "ত্রুটি"
+
+msgid "Success"
+msgstr "সফল"
+
+msgid "Testing Connection..."
+msgstr "সংযোগ পরীক্ষা হচ্ছে..."
+
+msgid "Connection Successful!"
+msgstr "সংযোগ সফল!"
+
+msgid "Connection Failed"
+msgstr "সংযোগ ব্যর্থ"
+
+msgid "Are you sure you want to cancel this order?"
+msgstr "আপনি কি নিশ্চিত যে এই অর্ডার বাতিল করতে চান?"
+
+msgid "Permission denied"
+msgstr "অনুমতি নেই"
+
+msgid "Settings saved successfully"
+msgstr "সেটিংস সফলভাবে সেভ হয়েছে"

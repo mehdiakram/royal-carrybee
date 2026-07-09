@@ -1,0 +1,48 @@
+# Dependencies
+/node_modules/
+/vendor/
+
+# IDE
+.idea/
+.vscode/
+*.sublime-project
+*.sublime-workspace
+
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Logs
+*.log
+npm-debug.log*
+
+# Build
+/dist/
+/build/
+
+# Environment
+.env
+.env.local
+.env.*.local
+
+# Composer
+composer.lock
+
+# Package managers
+package-lock.json
+yarn.lock
+
+# Temporary files
+*.tmp
+*.temp
+*.swp
+*~
+
+# Archives
+*.zip
+*.tar.gz
+*.rar
+
+# Documentation build
+/docs/_build/
