@@ -9,15 +9,18 @@ A professional WooCommerce shipping integration plugin for [Carrybee](https://ca
 
 ## 🚀 Features
 
+- **One-Click Order Dispatch** - "Sent to Carrybee" button in WooCommerce Orders list table (`edit.php?post_type=shop_order` & HPOS `wc-orders`) for instant 1-click booking without opening the order
+- **Smart Address Auto-Fill** - Intelligent city and zone matching from customer shipping/billing address on order edit page
+- **Address Preview & Badge** - Clean address preview summary and visual `✨ Auto-filled` indicator inside order metabox
 - **WooCommerce Shipping Method** - Adds Carrybee as a shipping option
 - **Cascading Location Dropdowns** - City → Zone → Area selection at checkout
-- **Auto Order Creation** - Automatically creates Carrybee parcel on order
+- **Auto Order Creation** - Automatically creates Carrybee parcel on order status change
 - **Bulk Actions** - Send multiple orders to Carrybee at once & Bulk Sync Status
-- **Real-time Tracking** - Consignment ID saved and displayed
+- **Real-time Tracking** - Consignment ID saved and displayed in custom table column
 - **Webhook Support** - Automatic order status updates
 - **Multi-Store Support** - Manage multiple pickup stores
 - **Sandbox Mode** - Test before going live
-- **Admin Meta Box** - Tracking info on order page
+- **Admin Meta Box** - Tracking info and instant management on order edit page
 - **Email Integration** - Tracking info in customer emails
 
 ## 📋 Requirements

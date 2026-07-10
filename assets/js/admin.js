@@ -220,8 +220,15 @@
             });
         },
 
-        syncOrder: function () {
+        syncOrder: function (e) {
+            if (e && typeof e.preventDefault === 'function') e.preventDefault();
             var consignment = $(this).data('consignment');
+            if (!consignment) {
+                var $row = $(this).closest('tr');
+                if ($row.length) {
+                    consignment = $row.find('.rcb-sync-btn').attr('data-consignment') || $row.find('.rcb-status').text().replace('📦', '').trim();
+                }
+            }
 
             Swal.fire({ title: 'Syncing...', allowOutsideClick: false, didOpen: function () { Swal.showLoading(); } });
 
@@ -259,8 +266,18 @@
             });
         },
 
-        createOrder: function () {
+        createOrder: function (e) {
+            if (e && typeof e.preventDefault === 'function') e.preventDefault();
             var orderId = $(this).data('order');
+            if (!orderId) {
+                var $row = $(this).closest('tr');
+                if ($row.length) {
+                    orderId = $row.data('order_id') || $row.attr('id');
+                    if (typeof orderId === 'string') {
+                        orderId = orderId.replace('post-', '').replace('order-', '');
+                    }
+                }
+            }
             var $btn = $(this);
 
             // Collect manual location data if present
@@ -324,20 +341,65 @@
             if ($('#rcb_manual_city').length === 0) return;
 
             var $select = $('#rcb_manual_city');
-            $select.prop('disabled', true).append('<option>Loading...</option>');
+            var $zone   = $('#rcb_manual_zone');
+            var $area   = $('#rcb_manual_area');
+            var addr    = (rcb_admin.order_address && rcb_admin.order_address.city_name) ? rcb_admin.order_address : null;
+
+            $select.prop('disabled', true);
 
             $.post(rcb_admin.ajax_url, { action: 'rcb_get_cities', nonce: rcb_admin.nonce }, function (res) {
                 $select.prop('disabled', false).find('option:not(:first)').remove();
-                if (res.success && res.data) {
-                    $.each(res.data, function (i, city) {
-                        $select.append('<option value="' + city.id + '">' + city.name + '</option>');
-                    });
+                if (!res.success || !res.data) return;
+
+                // Build city options
+                $.each(res.data, function (i, city) {
+                    $select.append('<option value="' + city.id + '">' + city.name + '</option>');
+                });
+
+                if (!addr) return;
+
+                // Auto-match city from order address
+                var cityName  = (addr.city_name  || '').toLowerCase().trim();
+                var stateName = (addr.state_name || '').toLowerCase().trim();
+
+                var bestCityId   = null;
+                var bestCityName = null;
+                var bestScore    = 0;
+
+                $.each(res.data, function (i, city) {
+                    var cn = city.name.toLowerCase().trim();
+                    var score = 0;
+
+                    // Exact match gets highest score
+                    if (cn === cityName || cn === stateName) {
+                        score = 100;
+                    } else if (cityName && (cityName.indexOf(cn) !== -1 || cn.indexOf(cityName) !== -1)) {
+                        score = 80;
+                    } else if (stateName && (stateName.indexOf(cn) !== -1 || cn.indexOf(stateName) !== -1)) {
+                        score = 70;
+                    }
+
+                    if (score > bestScore) {
+                        bestScore    = score;
+                        bestCityId   = city.id;
+                        bestCityName = city.name;
+                    }
+                });
+
+                if (bestCityId) {
+                    $select.val(bestCityId).addClass('rcb-autofilled-field');
+                    // Trigger zone loading with auto-fill
+                    RCB_Admin.loadManualZonesWithAutofill(bestCityId, addr);
                 }
             });
         },
 
         loadManualZones: function () {
             var cityId = $(this).val();
+            RCB_Admin.loadManualZonesWithAutofill(cityId, null);
+        },
+
+        loadManualZonesWithAutofill: function (cityId, addr) {
             var $zone = $('#rcb_manual_zone');
             var $area = $('#rcb_manual_area');
 
@@ -348,10 +410,48 @@
 
             $.post(rcb_admin.ajax_url, { action: 'rcb_get_zones', nonce: rcb_admin.nonce, city_id: cityId }, function (res) {
                 $zone.prop('disabled', false);
-                if (res.success && res.data) {
-                    $.each(res.data, function (i, zone) {
-                        $zone.append('<option value="' + zone.id + '">' + zone.name + '</option>');
-                    });
+                if (!res.success || !res.data) return;
+
+                $.each(res.data, function (i, zone) {
+                    $zone.append('<option value="' + zone.id + '">' + zone.name + '</option>');
+                });
+
+                if (!addr) return;
+
+                // Auto-match zone from order state/address2
+                var stateName = (addr.state_name || '').toLowerCase().trim();
+                var addr2     = (addr.address_2  || '').toLowerCase().trim();
+
+                var bestZoneId   = null;
+                var bestZoneName = null;
+                var bestScore    = 0;
+
+                $.each(res.data, function (i, zone) {
+                    var zn = zone.name.toLowerCase().trim();
+                    var score = 0;
+
+                    if (zn === stateName || zn === addr2) {
+                        score = 100;
+                    } else if (stateName && (stateName.indexOf(zn) !== -1 || zn.indexOf(stateName) !== -1)) {
+                        score = 80;
+                    } else if (addr2 && (addr2.indexOf(zn) !== -1 || zn.indexOf(addr2) !== -1)) {
+                        score = 70;
+                    }
+
+                    if (score > bestScore) {
+                        bestScore    = score;
+                        bestZoneId   = zone.id;
+                        bestZoneName = zone.name;
+                    }
+                });
+
+                if (bestZoneId) {
+                    $zone.val(bestZoneId).addClass('rcb-autofilled-field');
+                    // Show auto-fill badge & style
+                    $('#rcb-autofill-badge').show();
+                    $('.rcb-manual-location').addClass('rcb-autofilled');
+                    // Try loading areas too
+                    RCB_Admin.loadManualAreasAuto(cityId, bestZoneId);
                 }
             });
         },
@@ -359,6 +459,10 @@
         loadManualAreas: function () {
             var zoneId = $(this).val();
             var cityId = $('#rcb_manual_city').val();
+            RCB_Admin.loadManualAreasAuto(cityId, zoneId);
+        },
+
+        loadManualAreasAuto: function (cityId, zoneId) {
             var $area = $('#rcb_manual_area');
 
             $area.prop('disabled', true).find('option:not(:first)').remove();

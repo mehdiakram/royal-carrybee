@@ -3,7 +3,7 @@
  * Plugin Name: Royal Carrybee
  * Plugin URI: https://royaltechbd.com/royal-carrybee
  * Description: WooCommerce shipping integration with Carrybee courier service for Bangladesh.
- * Version: 26.07.09
+ * Version: 26.07.10
  * Author: Royal Technologies
  * Author URI: https://royaltechbd.com
  * Text Domain: royal-carrybee
@@ -19,7 +19,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 // Plugin constants
-define( 'RCB_VERSION', '26.07.09' );
+define( 'RCB_VERSION', '26.07.10' );
 define( 'RCB_PLUGIN_FILE', __FILE__ );
 define( 'RCB_PLUGIN_DIR', plugin_dir_path( __FILE__ ) );
 define( 'RCB_PLUGIN_URL', plugin_dir_url( __FILE__ ) );

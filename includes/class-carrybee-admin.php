@@ -33,6 +33,13 @@ class RCB_Admin {
         add_filter( 'handle_bulk_actions-edit-shop_order', array( $this, 'handle_bulk_actions' ), 10, 3 );
         add_filter( 'handle_bulk_actions-woocommerce_page_wc-orders', array( $this, 'handle_bulk_actions' ), 10, 3 );
         add_action( 'admin_notices', array( $this, 'bulk_action_admin_notice' ) );
+
+        // Orders Table custom column and quick actions
+        add_filter( 'manage_edit-shop_order_columns', array( $this, 'add_order_table_column' ), 20 );
+        add_action( 'manage_shop_order_posts_custom_column', array( $this, 'render_order_table_column' ), 20, 2 );
+        add_filter( 'manage_woocommerce_page_wc-orders_columns', array( $this, 'add_order_table_column' ), 20 );
+        add_action( 'manage_woocommerce_page_wc-orders_custom_column', array( $this, 'render_hpos_order_table_column' ), 20, 2 );
+        add_filter( 'woocommerce_admin_order_actions', array( $this, 'add_order_table_actions' ), 100, 2 );
     }
 
     public function register_bulk_actions( $bulk_actions ) {
@@ -209,35 +216,73 @@ class RCB_Admin {
                 <p class="rcb-no-order"><?php esc_html_e( 'No Carrybee order created yet.', 'royal-carrybee' ); ?></p>
                 
                 <?php 
-                $city_id = $order->get_meta( '_rcb_shipping_city_id' );
-                $zone_id = $order->get_meta( '_rcb_shipping_zone_id' );
+                $city_id  = $order->get_meta( '_rcb_shipping_city_id' );
+                $zone_id  = $order->get_meta( '_rcb_shipping_zone_id' );
                 
-                if ( ! $city_id || ! $zone_id ) : 
+                // Get order address for display/hint
+                $ship_city  = $order->get_shipping_city() ? $order->get_shipping_city() : $order->get_billing_city();
+                $ship_state = $order->get_shipping_state() ? $order->get_shipping_state() : $order->get_billing_state();
+                $ship_addr1 = $order->get_shipping_address_1() ? $order->get_shipping_address_1() : $order->get_billing_address_1();
+                $ship_addr2 = $order->get_shipping_address_2() ? $order->get_shipping_address_2() : $order->get_billing_address_2();
+                $ship_name  = trim( ( $order->get_shipping_first_name() ?: $order->get_billing_first_name() ) . ' ' . ( $order->get_shipping_last_name() ?: $order->get_billing_last_name() ) );
+                $ship_phone = $order->get_billing_phone() ?: $order->get_shipping_phone();
                 ?>
-                    <div class="rcb-manual-location" style="margin-bottom: 10px; background: #fff8e5; padding: 10px; border: 1px solid #ddd;">
-                        <p style="margin: 0 0 5px; color: #d63638;"><strong><?php esc_html_e( 'Missing Location Data!', 'royal-carrybee' ); ?></strong></p>
-                        <p style="margin: 0 0 10px; font-size: 11px;"><?php esc_html_e( 'Please select location manually to create order.', 'royal-carrybee' ); ?></p>
+
+                <?php if ( $ship_city || $ship_state || $ship_addr1 ) : ?>
+                <div class="rcb-order-address-preview">
+                    <p class="rcb-address-label"><?php esc_html_e( 'Order Address:', 'royal-carrybee' ); ?></p>
+                    <table class="rcb-addr-table">
+                        <?php if ( $ship_name ) : ?>
+                        <tr><td><?php esc_html_e( 'Name:', 'royal-carrybee' ); ?></td><td><?php echo esc_html( $ship_name ); ?></td></tr>
+                        <?php endif; ?>
+                        <?php if ( $ship_phone ) : ?>
+                        <tr><td><?php esc_html_e( 'Phone:', 'royal-carrybee' ); ?></td><td><?php echo esc_html( $ship_phone ); ?></td></tr>
+                        <?php endif; ?>
+                        <?php if ( $ship_addr1 ) : ?>
+                        <tr><td><?php esc_html_e( 'Address:', 'royal-carrybee' ); ?></td><td><?php echo esc_html( $ship_addr1 . ( $ship_addr2 ? ', ' . $ship_addr2 : '' ) ); ?></td></tr>
+                        <?php endif; ?>
+                        <?php if ( $ship_city ) : ?>
+                        <tr><td><?php esc_html_e( 'City:', 'royal-carrybee' ); ?></td><td><strong><?php echo esc_html( $ship_city ); ?></strong></td></tr>
+                        <?php endif; ?>
+                        <?php if ( $ship_state ) : ?>
+                        <tr><td><?php esc_html_e( 'State:', 'royal-carrybee' ); ?></td><td><strong><?php echo esc_html( $ship_state ); ?></strong></td></tr>
+                        <?php endif; ?>
+                    </table>
+                </div>
+                <?php endif; ?>
+                
+                <?php if ( ! $city_id || ! $zone_id ) : ?>
+                    <div class="rcb-manual-location">
+                        <p class="rcb-location-title">
+                            <span class="dashicons dashicons-location"></span>
+                            <?php esc_html_e( 'Carrybee Location', 'royal-carrybee' ); ?>
+                            <span class="rcb-autofill-badge" id="rcb-autofill-badge" style="display:none;">✨ <?php esc_html_e( 'Auto-filled', 'royal-carrybee' ); ?></span>
+                        </p>
+                        <p class="rcb-location-hint"><?php esc_html_e( 'City & Zone will auto-fill from your order address.', 'royal-carrybee' ); ?></p>
                         
-                        <p>
-                            <select id="rcb_manual_city" class="rcb-select" style="width: 100%; margin-bottom: 5px;">
-                                <option value=""><?php esc_html_e( 'Select City', 'royal-carrybee' ); ?></option>
+                        <div class="rcb-select-wrap">
+                            <label><?php esc_html_e( 'City/District', 'royal-carrybee' ); ?></label>
+                            <select id="rcb_manual_city" class="rcb-select">
+                                <option value=""><?php esc_html_e( 'Loading cities...', 'royal-carrybee' ); ?></option>
                             </select>
-                        </p>
-                        <p>
-                            <select id="rcb_manual_zone" class="rcb-select" style="width: 100%; margin-bottom: 5px;" disabled>
-                                <option value=""><?php esc_html_e( 'Select Zone', 'royal-carrybee' ); ?></option>
+                        </div>
+                        <div class="rcb-select-wrap">
+                            <label><?php esc_html_e( 'Zone/Thana', 'royal-carrybee' ); ?></label>
+                            <select id="rcb_manual_zone" class="rcb-select" disabled>
+                                <option value=""><?php esc_html_e( 'Select Zone/Thana', 'royal-carrybee' ); ?></option>
                             </select>
-                        </p>
-                        <p>
-                            <select id="rcb_manual_area" class="rcb-select" style="width: 100%;" disabled>
+                        </div>
+                        <div class="rcb-select-wrap">
+                            <label><?php esc_html_e( 'Area (Optional)', 'royal-carrybee' ); ?></label>
+                            <select id="rcb_manual_area" class="rcb-select" disabled>
                                 <option value=""><?php esc_html_e( 'Select Area', 'royal-carrybee' ); ?></option>
                             </select>
-                        </p>
+                        </div>
                     </div>
                 <?php endif; ?>
 
                 <button type="button" class="button button-primary rcb-create-btn" data-order="<?php echo esc_attr( $order->get_id() ); ?>">
-                    <?php esc_html_e( 'Create Carrybee Order', 'royal-carrybee' ); ?>
+                    <span class="dashicons dashicons-external" style="margin-top:3px;"></span> <?php esc_html_e( 'Sent to Carrybee', 'royal-carrybee' ); ?>
                 </button>
             <?php endif; ?>
         </div>
@@ -368,7 +413,48 @@ class RCB_Admin {
         }
 
         if ( ! $city_id || ! $zone_id ) {
-            wp_send_json_error( __( 'Missing shipping city or zone data', 'royal-carrybee' ) );
+            // Server-side auto match if missing (when clicked from table quick action or 1-click button)
+            $city_name  = $order->get_shipping_city() ? $order->get_shipping_city() : $order->get_billing_city();
+            $state_name = $order->get_shipping_state() ? $order->get_shipping_state() : $order->get_billing_state();
+
+            if ( ! $city_id && ( ! empty( $city_name ) || ! empty( $state_name ) ) ) {
+                $cities_res = RCB_API::get_cities();
+                $cities = $cities_res['data']['cities'] ?? $cities_res['cities'] ?? $cities_res['data'] ?? array();
+                if ( is_array( $cities ) && ! empty( $cities ) ) {
+                    foreach ( $cities as $c ) {
+                        if ( isset( $c['name'] ) && ( strcasecmp( trim( $c['name'] ), trim( $city_name ) ) === 0 || strcasecmp( trim( $c['name'] ), trim( $state_name ) ) === 0 || stripos( trim( $city_name ), trim( $c['name'] ) ) !== false || stripos( trim( $state_name ), trim( $c['name'] ) ) !== false ) ) {
+                            $city_id = $c['id'];
+                            break;
+                        }
+                    }
+                }
+            }
+
+            if ( $city_id && ! $zone_id ) {
+                $zone_name = $order->get_shipping_address_2() ? $order->get_shipping_address_2() : ( ! empty( $state_name ) ? $state_name : ( $order->get_billing_address_2() ? $order->get_billing_address_2() : '' ) );
+                if ( ! empty( $zone_name ) ) {
+                    $zones_res = RCB_API::get_zones( $city_id );
+                    $zones = $zones_res['data']['zones'] ?? $zones_res['zones'] ?? $zones_res['data'] ?? array();
+                    if ( is_array( $zones ) && ! empty( $zones ) ) {
+                        foreach ( $zones as $z ) {
+                            if ( isset( $z['name'] ) && ( strcasecmp( trim( $z['name'] ), trim( $zone_name ) ) === 0 || stripos( trim( $zone_name ), trim( $z['name'] ) ) !== false || stripos( trim( $z['name'] ), trim( $zone_name ) ) !== false ) ) {
+                                $zone_id = $z['id'];
+                                break;
+                            }
+                        }
+                    }
+                }
+            }
+
+            if ( $city_id && $zone_id ) {
+                $order->update_meta_data( '_rcb_shipping_city_id', $city_id );
+                $order->update_meta_data( '_rcb_shipping_zone_id', $zone_id );
+                $order->save();
+            }
+        }
+
+        if ( ! $city_id || ! $zone_id ) {
+            wp_send_json_error( __( 'Missing shipping city or zone data. Please select location manually on the order page.', 'royal-carrybee' ) );
         }
 
         $first_name = $order->get_shipping_first_name() ? $order->get_shipping_first_name() : $order->get_billing_first_name();
@@ -462,5 +548,86 @@ class RCB_Admin {
             'message'        => __( 'Carrybee order created successfully!', 'royal-carrybee' ),
             'consignment_id' => $consignment['consignment_id'] ?? '',
         ) );
+    }
+
+    /**
+     * Add column to WooCommerce Orders table
+     */
+    public function add_order_table_column( $columns ) {
+        $new_columns = array();
+        foreach ( $columns as $key => $column ) {
+            $new_columns[ $key ] = $column;
+            if ( 'order_status' === $key ) {
+                $new_columns['rcb_status'] = __( '🐝 Carrybee', 'royal-carrybee' );
+            }
+        }
+        if ( ! isset( $new_columns['rcb_status'] ) ) {
+            $new_columns['rcb_status'] = __( '🐝 Carrybee', 'royal-carrybee' );
+        }
+        return $new_columns;
+    }
+
+    /**
+     * Render column content for Legacy Orders table
+     */
+    public function render_order_table_column( $column, $post_id ) {
+        if ( 'rcb_status' === $column ) {
+            $order = wc_get_order( $post_id );
+            if ( $order ) {
+                $this->render_order_column_content( $order );
+            }
+        }
+    }
+
+    /**
+     * Render column content for HPOS Orders table
+     */
+    public function render_hpos_order_table_column( $column, $order ) {
+        if ( 'rcb_status' === $column ) {
+            if ( $order instanceof WC_Order ) {
+                $this->render_order_column_content( $order );
+            }
+        }
+    }
+
+    /**
+     * Render Carrybee column inside order list row
+     */
+    private function render_order_column_content( $order ) {
+        $consignment_id = $order->get_meta( '_rcb_consignment_id' );
+        if ( $consignment_id ) {
+            echo '<span class="rcb-status rcb-status-delivered" style="font-size:10px; padding:2px 6px; display:inline-block; margin-bottom:3px;" title="' . esc_attr__( 'Consignment ID', 'royal-carrybee' ) . '">📦 ' . esc_html( $consignment_id ) . '</span><br>';
+            echo '<button type="button" class="button button-small rcb-sync-btn" data-consignment="' . esc_attr( $consignment_id ) . '" style="padding:0 6px; min-height:22px; line-height:20px; font-size:11px;">' . esc_html__( 'Sync', 'royal-carrybee' ) . '</button>';
+        } else {
+            echo '<button type="button" class="button button-small rcb-create-btn rcb-table-send-btn" data-order="' . esc_attr( $order->get_id() ) . '" style="background:linear-gradient(135deg, #f59e0b 0%, #d97706 100%); color:#fff; border:none; padding:2px 8px; min-height:24px; line-height:20px; border-radius:4px; font-weight:600; font-size:11px; cursor:pointer; box-shadow:0 1px 3px rgba(245,158,11,0.3);">🐝 ' . esc_html__( 'Sent to Carrybee', 'royal-carrybee' ) . '</button>';
+        }
+    }
+
+    /**
+     * Add quick action icon to Orders actions column
+     */
+    public function add_order_table_actions( $actions, $order ) {
+        if ( ! $order instanceof WC_Order ) {
+            $order = wc_get_order( $order );
+        }
+        if ( ! $order ) {
+            return $actions;
+        }
+
+        $consignment_id = $order->get_meta( '_rcb_consignment_id' );
+        if ( $consignment_id ) {
+            $actions['rcb_sync'] = array(
+                'url'    => 'javascript:void(0);',
+                'name'   => __( 'Carrybee: Sync (' . $consignment_id . ')', 'royal-carrybee' ),
+                'action' => 'rcb_sync rcb-sync-btn',
+            );
+        } else {
+            $actions['rcb_send'] = array(
+                'url'    => 'javascript:void(0);',
+                'name'   => __( 'Sent to Carrybee (এক ক্লিকে)', 'royal-carrybee' ),
+                'action' => 'rcb_send rcb-create-btn',
+            );
+        }
+        return $actions;
     }
 }

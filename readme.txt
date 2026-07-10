@@ -6,7 +6,7 @@ Tested up to: 6.4
 Requires PHP: 7.4
 WC requires at least: 5.0
 WC tested up to: 8.0
-Stable tag: 1.0.0
+Stable tag: 26.07.10
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -62,6 +62,11 @@ Yes, COD (Cash on Delivery) is fully supported.
 3. Order tracking meta box
 
 == Changelog ==
+
+= 26.07.10 =
+* Added: One-Click "Sent to Carrybee" quick action and button on WooCommerce Orders Table and Order panel.
+* Added: Automatic server-side and client-side address matching for City & Zone.
+* Added: Order address summary preview card and auto-filled state in admin metabox.
 
 = 1.0.0 =
 * Initial release

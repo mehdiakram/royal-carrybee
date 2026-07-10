@@ -90,10 +90,42 @@ class RCB_Settings {
         wp_enqueue_style( 'rcb-admin', RCB_PLUGIN_URL . 'assets/css/admin.css', array(), RCB_VERSION );
         wp_enqueue_script( 'rcb-admin', RCB_PLUGIN_URL . 'assets/js/admin.js', $js_deps, RCB_VERSION, true );
 
+        // Pass order address data for auto-fill on order edit page
+        $order_address_data = array();
+        if ( $is_order_page ) {
+            $order_id = 0;
+            if ( isset( $_GET['id'] ) ) {
+                $order_id = absint( $_GET['id'] ); // HPOS
+            } elseif ( isset( $_GET['post'] ) ) {
+                $order_id = absint( $_GET['post'] ); // Legacy
+            } elseif ( isset( $GLOBALS['post']->ID ) ) {
+                $order_id = absint( $GLOBALS['post']->ID );
+            }
+            if ( $order_id ) {
+                $order = wc_get_order( $order_id );
+                if ( $order ) {
+                    $city  = $order->get_shipping_city() ? $order->get_shipping_city() : $order->get_billing_city();
+                    $state = $order->get_shipping_state() ? $order->get_shipping_state() : $order->get_billing_state();
+                    $addr1 = $order->get_shipping_address_1() ? $order->get_shipping_address_1() : $order->get_billing_address_1();
+                    $addr2 = $order->get_shipping_address_2() ? $order->get_shipping_address_2() : $order->get_billing_address_2();
+                    $order_address_data = array(
+                        'city_name'  => sanitize_text_field( $city ),
+                        'state_name' => sanitize_text_field( $state ),
+                        'address_1'  => sanitize_text_field( $addr1 ),
+                        'address_2'  => sanitize_text_field( $addr2 ),
+                        'city_id'    => $order->get_meta( '_rcb_shipping_city_id' ),
+                        'zone_id'    => $order->get_meta( '_rcb_shipping_zone_id' ),
+                        'area_id'    => $order->get_meta( '_rcb_shipping_area_id' ),
+                    );
+                }
+            }
+        }
+
         wp_localize_script( 'rcb-admin', 'rcb_admin', array(
-            'ajax_url' => admin_url( 'admin-ajax.php' ),
-            'nonce'    => wp_create_nonce( 'rcb_admin_nonce' ),
-            'i18n'     => array(
+            'ajax_url'     => admin_url( 'admin-ajax.php' ),
+            'nonce'        => wp_create_nonce( 'rcb_admin_nonce' ),
+            'order_address' => $order_address_data,
+            'i18n'         => array(
                 'saving'           => __( 'Saving...', 'royal-carrybee' ),
                 'saved'            => __( 'Settings Saved!', 'royal-carrybee' ),
                 'error'            => __( 'Error', 'royal-carrybee' ),
@@ -102,6 +134,10 @@ class RCB_Settings {
                 'connection_ok'    => __( 'Connection Successful!', 'royal-carrybee' ),
                 'connection_fail'  => __( 'Connection Failed', 'royal-carrybee' ),
                 'confirm_cancel'   => __( 'Are you sure you want to cancel this order?', 'royal-carrybee' ),
+                'select_city'      => __( 'Select City/District', 'royal-carrybee' ),
+                'select_zone'      => __( 'Select Zone/Thana', 'royal-carrybee' ),
+                'select_area'      => __( 'Select Area', 'royal-carrybee' ),
+                'autofilled'       => __( 'Address auto-filled from order!', 'royal-carrybee' ),
             ),
         ) );
     }
