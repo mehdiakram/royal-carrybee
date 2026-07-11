@@ -5,6 +5,13 @@ All notable changes to Royal Carrybee will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [26.07.11] - 2026-07-11
+
+### Added
+- **Smart Auto-matching Improvements**: Improved the fallback mechanism by automatically mapping WooCommerce State (District) to Carrybee City and WooCommerce City to Carrybee Zone, preventing order creation failures due to typing mistakes.
+- **Address Lookup Fallback API**: Uses Carrybee's native address lookup API as a final fallback for creating an order automatically if City/Zone mappings are missing.
+- **Improved UI for Location Selection**: Replaced "Loading cities..." spinner with a descriptive "Failed to load cities" error state in case of connection failure.
+
 ## [26.07.10] - 2026-07-10
 
 ### Added

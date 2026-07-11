@@ -349,7 +349,11 @@
 
             $.post(rcb_admin.ajax_url, { action: 'rcb_get_cities', nonce: rcb_admin.nonce }, function (res) {
                 $select.prop('disabled', false).find('option:not(:first)').remove();
-                if (!res.success || !res.data) return;
+                if (!res.success || !res.data) {
+                    $select.find('option:first').text('Failed to load cities');
+                    return;
+                }
+                $select.find('option:first').text('Select City/District');
 
                 // Build city options
                 $.each(res.data, function (i, city) {

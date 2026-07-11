@@ -66,13 +66,19 @@ class RCB_Order {
 
         // Try auto-matching city and zone if missing (for bulk/past orders)
         if ( ! $city_id || ! $zone_id ) {
-            $city_name = $order->get_shipping_city() ? $order->get_shipping_city() : $order->get_billing_city();
-            if ( ! empty( $city_name ) ) {
+            $states = WC()->countries->get_states( 'BD' );
+            $state_code = $order->get_shipping_state() ? $order->get_shipping_state() : $order->get_billing_state();
+            $state_name = isset( $states[ $state_code ] ) ? $states[ $state_code ] : $state_code;
+            
+            // In BD, Woo State (Dropdown) = Carrybee City, Woo City (Text) = Carrybee Zone
+            $carrybee_city_name = ! empty( $state_name ) ? $state_name : ( $order->get_shipping_city() ? $order->get_shipping_city() : $order->get_billing_city() );
+            
+            if ( ! empty( $carrybee_city_name ) ) {
                 $cities_res = RCB_API::get_cities();
                 $cities = $cities_res['data']['cities'] ?? $cities_res['cities'] ?? $cities_res['data'] ?? array();
                 if ( is_array( $cities ) && ! empty( $cities ) ) {
                     foreach ( $cities as $c ) {
-                        if ( isset( $c['name'] ) && ( strcasecmp( trim( $c['name'] ), trim( $city_name ) ) === 0 || stripos( trim( $city_name ), trim( $c['name'] ) ) !== false || stripos( trim( $c['name'] ), trim( $city_name ) ) !== false ) ) {
+                        if ( isset( $c['name'] ) && ( strcasecmp( trim( $c['name'] ), trim( $carrybee_city_name ) ) === 0 || stripos( trim( $carrybee_city_name ), trim( $c['name'] ) ) !== false || stripos( trim( $c['name'] ), trim( $carrybee_city_name ) ) !== false ) ) {
                             $city_id = $c['id'];
                             break;
                         }
@@ -81,13 +87,13 @@ class RCB_Order {
             }
 
             if ( $city_id && ! $zone_id ) {
-                $zone_name = $order->get_shipping_address_2() ? $order->get_shipping_address_2() : ( $order->get_shipping_state() ? $order->get_shipping_state() : ( $order->get_billing_address_2() ? $order->get_billing_address_2() : $order->get_billing_state() ) );
-                if ( ! empty( $zone_name ) ) {
+                $carrybee_zone_name = $order->get_shipping_city() ? $order->get_shipping_city() : ( $order->get_billing_city() ? $order->get_billing_city() : ( $order->get_shipping_address_2() ? $order->get_shipping_address_2() : '' ) );
+                if ( ! empty( $carrybee_zone_name ) ) {
                     $zones_res = RCB_API::get_zones( $city_id );
                     $zones = $zones_res['data']['zones'] ?? $zones_res['zones'] ?? $zones_res['data'] ?? array();
                     if ( is_array( $zones ) && ! empty( $zones ) ) {
                         foreach ( $zones as $z ) {
-                            if ( isset( $z['name'] ) && ( strcasecmp( trim( $z['name'] ), trim( $zone_name ) ) === 0 || stripos( trim( $zone_name ), trim( $z['name'] ) ) !== false || stripos( trim( $z['name'] ), trim( $zone_name ) ) !== false ) ) {
+                            if ( isset( $z['name'] ) && ( strcasecmp( trim( $z['name'] ), trim( $carrybee_zone_name ) ) === 0 || stripos( trim( $carrybee_zone_name ), trim( $z['name'] ) ) !== false || stripos( trim( $z['name'] ), trim( $carrybee_zone_name ) ) !== false ) ) {
                                 $zone_id = $z['id'];
                                 break;
                             }
@@ -100,6 +106,28 @@ class RCB_Order {
                 $order->update_meta_data( '_rcb_shipping_city_id', $city_id );
                 $order->update_meta_data( '_rcb_shipping_zone_id', $zone_id );
                 $order->save();
+            }
+        }
+
+        // Final fallback: Use Address Details Lookup API based on full address text (like Steadfast)
+        if ( ! $city_id || ! $zone_id ) {
+            $addr1 = $order->get_shipping_address_1() ? $order->get_shipping_address_1() : $order->get_billing_address_1();
+            $addr2 = $order->get_shipping_address_2() ? $order->get_shipping_address_2() : $order->get_billing_address_2();
+            $city  = $order->get_shipping_city() ? $order->get_shipping_city() : $order->get_billing_city();
+            
+            $full_address = trim( implode( ', ', array_filter( array( $addr1, $addr2, $city ) ) ) );
+            if ( ! empty( $full_address ) ) {
+                $lookup_res = RCB_API::get_address_details( $full_address );
+                if ( ! isset( $lookup_res['error'] ) && ! empty( $lookup_res['data'] ) ) {
+                    $city_id = $lookup_res['data']['city_id'] ?? $city_id;
+                    $zone_id = $lookup_res['data']['zone_id'] ?? $zone_id;
+                    
+                    if ( $city_id && $zone_id ) {
+                        $order->update_meta_data( '_rcb_shipping_city_id', $city_id );
+                        $order->update_meta_data( '_rcb_shipping_zone_id', $zone_id );
+                        $order->save();
+                    }
+                }
             }
         }
 
